@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <meta charset="utf-8">
+        <title>Suprimatizm</title>        
+    </body>
+    <head>
+        <canvas id="figure" fillStyle="#20B2AA" width=2500 height=1000/>
+        <script>
+            let canvas=document.getElementById("figure");
+            
+            let figure=canvas.getContext("2d");
+            
+            let shapePos = 0;       
+            let shape_size = 5;            
+            function drawFigure(){
+                figure.fillStyle="#00F000";
+                for(var i=0;i<100;i++){                    
+                    for(var j=shape_size*i;j>0;j--){              
+                        figure.fillRect(shapePos*i,shapePos-(i+j),55+j, 55+j);                        
+                    }
+                    
+                }
+                figure.fillStyle="#CFF000";
+                for(var i=0;i<100;i++){                    
+                    for(var j=shape_size*i;j>0;j--){              
+                        figure.fillRect(shapePos*i+shape_size,shapePos-(i+j)+5,55+j, 55+j); 
+                    }
+                }
+            }
+            
+            function eraseFigure(){
+                figure.fillStyle="#FFFFFF";
+                for(var i=0;i<100;i++){                    
+                    for(var j=shape_size*i;j>0;j--){             
+                        figure.fillRect(shapePos*i,shapePos-(i+j),55+j, 55+j); 
+                    }
+                }
+                for(var i=0;i<100;i++){                    
+                    for(var j=shape_size*i;j>0;j--){             
+                        figure.fillRect(shapePos*i+shape_size,shapePos-(i+j)+5,55+j, 55+j); 
+                    }
+                }
+            }           
+            
+            setInterval(function (){
+                eraseFigure(); 
+                shapePos++;                 
+                drawFigure();                               
+            }, 500);
+        </script>
+    </head>
+</html>
