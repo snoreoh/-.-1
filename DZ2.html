@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Suprimatizm</title>        
+    </head>
+    <body>
+        <canvas id="figure" fillStyle="#20B2AA" width=2500 height=1000/>
+        <script>
+            let canvas=document.getElementById("figure");  
+            canvas.backgroundColor = "#aacccc";
+            let figure=canvas.getContext("2d");
+            
+            var imageData = figure.getImageData(0, 0, 50, 50);
+            
+            
+            let shapePos = 0;       
+            let shape_size = 100;            
+            function drawFigure(){                
+                for(var i=0;i<100;i++){                    
+                    for(var j=0;j<shape_size*i;j++){   
+                        imageData.data[i*4+shape_size*j] = 100;
+                        imageData.data[i*4+shape_size*j+1] = 50;  
+                        imageData.data[i*4+shape_size*j+2] = 25;
+                        imageData.data[i*4+shape_size*j+3] = 50;
+                    }                    
+                }       
+                figure.putImageData(imageData, shapePos, shapePos);               
+
+            }
+            
+            function eraseFigure(){                
+                for(var i=0;i<100;i++){                    
+                    for(var j=0;j<shape_size*i;j++){  
+                        imageData.data[i*4+shape_size*j] = 1;
+                        imageData.data[i*4 +shape_size*j+1] = 2;  
+                        imageData.data[i*4 +shape_size*j+2] = 3;
+                        imageData.data[i*4+shape_size*j+3] = 100;
+                    }
+                }
+                figure.putImageData(imageData, shapePos,shapePos);
+                           
+            }           
+            
+            setInterval(function (){
+                eraseFigure(); 
+                shapePos++;                 
+                drawFigure();                               
+            }, 5);
+        </script>
+    </body>
+</html>
