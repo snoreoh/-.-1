@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>   
+   <canvas id = "line" width=700 height = 700/>
+    <script>
+        function DrawLine(x1,x2,y1,y2){
+            console.log(x1,x2,y1,y2);
+            const dx = Math.abs(x2-x1);
+            const dy = Math.abs(y2-y1);
+            const X = x1 < x2 ? 1 : -1;
+            const Y = y1 < y2 ? 1 : -1;
+            var diff = dy-dx;
+            ctx.fillStyle = "#ff00cc";
+            ctx.fillRect(x2,y2,1,1);
+            while(x1 != x2 || y1 != y2){
+                console.log(x1,x2,y1,y2);
+                ctx.fillRect(x1,y1,1,1);
+                var diff_2 = error*2;
+                if(error_2 > -dy){
+                    error -= dy;
+                    x1 += X; 
+                }
+                if (error_2 < dx){
+                    error += dx;
+                    y1 += Y;
+                }             
+                
+            }
+        }    
+    </script>
+    <script>
+        let canvas = document.getElementById("line");
+        let ctx = canvas.getContext("2d");
+        var flag = true;
+        var x1 = 0, y1 = 0;
+        canvas.addEventListener("click", function(event) {
+            if(event.which == 1){
+                if(flag){
+                    var x3 = event.offsetX;
+                    var y3 = event.offsetY;
+                    flag = false;
+                    console.log(x3,y3);
+                    x1 = x3;
+                    y1 = y3;
+                }
+                else{
+                    console.log(x1,y1);                   
+                    var x2 = event.offsetX;
+                    var y2 = event.offsetY;
+                    console.log(x2,y2);
+                    DrawLine(x1,x2,y1,y2);
+                    flag = true;
+                }
+            }
+        });          
+                                     
+    </script>
+</body>
+</html>
