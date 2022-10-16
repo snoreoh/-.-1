@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>   
+  <canvas id="homework" width="1000" height="1000"/>
+   <script>
+       let canvas = document.getElementById("homework");
+       let ctx = canvas.getContext("2d");
+       
+       function dFs(y){
+           return 4*y+6;
+       }
+       
+       function dFd(x,y){
+           return 4*y+4*x+10;
+       }
+       
+       function Draw_Circle(r){
+           let x = -r;
+           let y = 0;
+           let F = 1-2*r;           
+           while(y <= Math.abs(x)){               
+               ctx.fillRect(x+300,y+300,1,1);
+               ctx.fillRect(-x+300,-y+300,1,1);
+               ctx.fillRect(-x+300,y+300,1,1); 
+               ctx.fillRect(x+300,-y+300,1,1); 
+               ctx.fillRect(y+300,x+300,1,1);
+               ctx.fillRect(-y+300,-x+300,1,1);
+               ctx.fillRect(-y+300,x+300,1,1); 
+               ctx.fillRect(y+300,-x+300,1,1);
+               if(F < 0){
+                   F+=dFs(y);
+                   y++;
+               }
+               else{
+                   F+= dFd(x,y);
+                   x++;
+                   y++;
+               }
+           }
+       }
+    
+       Draw_Circle(200);
+    </script>
+</body>
+</html>
